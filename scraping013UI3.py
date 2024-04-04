@@ -8,7 +8,7 @@ from io import BytesIO
 def scrape_website(domain):
     data = []
     from_page = 1
-    to_page = 3  # You may adjust the range as needed
+    to_page = 30  # You may adjust the range as needed
 
     for i in range(from_page, to_page + 1):
         response = requests.get(f"https://www.trustpilot.com/review/{domain}?page={i}")
