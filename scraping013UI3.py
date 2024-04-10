@@ -5,11 +5,15 @@ import pandas as pd
 from io import BytesIO
 
 # Function to perform the scraping
-def scrape_website(domain):
+#def scrape_website(domain):
+ #   data = []
+  #  from_page = 1
+   # to_page = 10  # You may adjust the range as needed
+
+# Function to perform the scraping
+def scrape_website(domain, to_page):  # Modified to accept 'to_page' as a parameter
     data = []
     from_page = 1
-    to_page = 10  # You may adjust the range as needed
-
     for i in range(from_page, to_page + 1):
         response = requests.get(f"https://www.trustpilot.com/review/{domain}?page={i}")
         web_page = response.text
@@ -41,11 +45,12 @@ st.title('Trustpilot Review Scraper')
 
 # User inputs the URL part for Trustpilot reviews
 user_input_url = st.text_input('Enter Trustpilot part of the URL (e.g., www.lego.com):', '')
+number_of_pages = st.number_input('Enter the number of pages to scrape:', min_value=1, max_value=100, value=3)
 
 if st.button('Scrape'):
     if user_input_url:
         domain = user_input_url.strip()
-        result_df = scrape_website(domain)
+        result_df = scrape_website(domain,number_of_pages)
         
         if not result_df.empty:
             st.write('Scraping Completed Successfully!')
