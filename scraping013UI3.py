@@ -45,7 +45,12 @@ st.title('Trustpilot Review Scraper')
 
 # User inputs the URL part for Trustpilot reviews
 user_input_url = st.text_input('Enter Trustpilot part of the URL (e.g., www.lego.com):', '')
-number_of_pages = st.number_input('Enter the number of pages to scrape:', min_value=1, max_value=100, value=3)
+number_of_pages = st.number_input('Enter the number of pages to scrape:', min_value=1, max_value=1001, value=1001)
+
+if number_of_pages == 1001:
+    number_of_pages = "All Pages"
+
+st.text_input('Number of pages to scrape:', value=str(number_of_pages), key='number_of_pages_input', disabled=True)
 
 if st.button('Scrape'):
     if user_input_url:
